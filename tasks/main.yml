@@ -13,6 +13,16 @@
     name: redis
     state: present
 
+- name: configure redis
+  become: yes
+  lineinfile:
+    dest: /etc/redis.conf
+    line: "bind {{ redis_listen | default('127.0.0.1') }}"
+    regexp: "^bind\\s.*"
+    state: present
+  notify:
+    - restart redis
+
 - name: set redis to start on startup
   become: yes
   service:
