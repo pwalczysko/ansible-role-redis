@@ -1,0 +1,5 @@
+---
+- hosts: all
+  roles:
+    - role: ansible-role-redis
+      redis_listen: 0.0.0.0
