@@ -3,7 +3,13 @@ Redis
 
 Install Redis.
 
-TODO: Add configuration options.
+
+Role Variables
+--------------
+
+All variables are optional.
+- `redis_listen`: String containing interfaces to bind to, default `127.0.0.1`
+
 
 Author Information
 ------------------
