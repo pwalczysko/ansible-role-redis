@@ -2,19 +2,19 @@
 # tasks file for roles/redis
 
 - name: system packages | install epel repo
-  become: yes
+  become: true
   yum:
     name: epel-release
     state: present
 
 - name: install redis
-  become: yes
+  become: true
   yum:
     name: redis
     state: present
 
 - name: configure redis
-  become: yes
+  become: true
   lineinfile:
     dest: /etc/redis.conf
     line: "bind {{ redis_listen | default('127.0.0.1') }}"
@@ -24,8 +24,8 @@
     - restart redis
 
 - name: set redis to start on startup
-  become: yes
+  become: true
   service:
     name: redis
     state: started
-    enabled: yes
+    enabled: true

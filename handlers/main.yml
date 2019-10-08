@@ -2,7 +2,7 @@
 # Handlers for redis
 
 - name: restart redis
-  become: yes
+  become: true
   service:
     name: redis
     state: restarted
