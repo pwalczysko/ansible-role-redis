@@ -16,7 +16,7 @@
 - name: configure redis
   become: true
   lineinfile:
-    dest: /etc/redis.conf
+    dest: /etc/redis/redis.conf
     line: "bind {{ redis_listen | default('127.0.0.1') }}"
     regexp: "^bind\\s.*"
     state: present
