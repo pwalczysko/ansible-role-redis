@@ -9,7 +9,7 @@ lint: |
     flake8
 platforms:
   - name: instance
-    image: centos/systemd:latest
+    image: rockylinux:9
     command: /sbin/init
     privileged: true
 provisioner:

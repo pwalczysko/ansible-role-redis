@@ -3,13 +3,13 @@
 
 - name: system packages | install epel repo
   become: true
-  yum:
+  ansible.builtin.dnf:
     name: epel-release
     state: present
 
 - name: install redis
   become: true
-  yum:
+  ansible.builtin.dnf:
     name: redis
     state: present
 
