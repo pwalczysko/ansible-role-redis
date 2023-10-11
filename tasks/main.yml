@@ -34,6 +34,18 @@
     state: present
   notify:
     - restart redis
+  when: rockyrepo_name.stat.exists
+
+- name: configure redis for RHEL
+  become: true
+  lineinfile:
+    dest: /etc/redis.conf
+    line: "bind {{ redis_listen | default('127.0.0.1') }}"
+    regexp: "^bind\\s.*"
+    state: present
+  notify:
+    - restart redis
+  when: ansible_os_family == 'RedHat' and not rockyrepo_name.stat.exists
 
 - name: set redis to start on startup
   become: true
