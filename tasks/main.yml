@@ -1,11 +1,30 @@
 ---
 # tasks file for roles/redis
 
+- name : check rocky.repo file
+  stat:
+    path: /etc/yum.repos.d/rocky.repo
+  register: rockyrepo_name
+
+- name: zeroc ice | Add CRB repository for RHEL
+  become: true
+  ansible.builtin.command:
+    subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+  when: ansible_os_family == 'RedHat' and not rockyrepo_name.stat.exists
+
 - name: system packages | install epel repo
   become: true
   ansible.builtin.dnf:
     name: epel-release
     state: present
+  when: rockyrepo_name.stat.exists
+
+- name: zeroc ice | Add CRB repository for RHEL
+  become: true
+  ansible.builtin.command:
+    subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
+  when: ansible_os_family == 'RedHat'
+
 
 - name: install redis
   become: true
