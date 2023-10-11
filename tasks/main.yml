@@ -36,6 +36,8 @@
     - restart redis
   when: rockyrepo_name.stat.exists
 
+# Note: Fails in --check mode with /etc/redis/redis.conf
+# does not exist
 - name: configure redis for RHEL
   become: true
   lineinfile:
