@@ -1,7 +1,7 @@
 Redis
 =====
 
-[![Build Status](https://travis-ci.org/ome/ansible-role-redis.svg)](https://travis-ci.org/ome/ansible-role-redis)
+[![Actions Status](https://github.com/ome/ansible-role-redis/workflows/Molecule/badge.svg)](https://github.com/ome/ansible-role-redis/actions)
 [![Ansible Role](https://img.shields.io/ansible/role/41955.svg)](https://galaxy.ansible.com/ome/redis/)
 
 Install Redis.
