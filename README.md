@@ -2,7 +2,7 @@ Redis
 =====
 
 [![Actions Status](https://github.com/ome/ansible-role-redis/workflows/Molecule/badge.svg)](https://github.com/ome/ansible-role-redis/actions)
-[![Ansible Role](https://img.shields.io/ansible/role/41955.svg)](https://galaxy.ansible.com/ome/redis/)
+[![Ansible Role](https://img.shields.io/badge/ansible--galaxy-redis-blue.svg)](https://galaxy.ansible.com/ui/standalone/roles/ome/redis/)
 
 Install Redis.
 
