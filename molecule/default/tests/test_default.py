@@ -12,4 +12,4 @@ def test_service_running_and_enabled(host):
 
 
 def test_redis_config(host):
-    assert host.file('/etc/redis.conf').contains('bind 0.0.0.0')
+    assert host.file('/etc/redis/redis.conf').contains('bind 0.0.0.0')
