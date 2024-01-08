@@ -9,6 +9,9 @@ galaxy_info:
     - name: EL
       versions:
         - 9
+    - name: Ubuntu
+      versions:
+        - jammy
   namespace: ome
   role_name: redis
   galaxy_tags: []

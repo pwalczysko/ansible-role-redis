@@ -1,40 +1,35 @@
 ---
 # tasks file for roles/redis
 
-- name : check rocky.repo file
-  stat:
-    path: /etc/yum.repos.d/rocky.repo
-  register: rockyrepo_name
+- name: Import a key for epel
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+  when: ansible_os_family == 'RedHat'
 
-- name: system packages | Add CRB repository for RHEL
-  become: true
-  ansible.builtin.command:
-    subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
-  when: ansible_os_family == 'RedHat' and not rockyrepo_name.stat.exists
-
-- name: system packages | install epel repo
+- name: epel | setup dnf repository
   become: true
   ansible.builtin.dnf:
-    name: epel-release
+    update_cache: true
+    name:
+      https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
     state: present
-  when: rockyrepo_name.stat.exists
+  when: ansible_os_family == 'RedHat'
 
 - name: install redis
   become: true
   ansible.builtin.dnf:
     name: redis
     state: present
+  when: ansible_os_family == 'RedHat'
 
-- name: configure redis
+- name: install redis
   become: true
-  lineinfile:
-    dest: /etc/redis/redis.conf
-    line: "bind {{ redis_listen | default('127.0.0.1') }}"
-    regexp: "^bind\\s.*"
+  ansible.builtin.apt:
+    update_cache: true
+    name: redis
     state: present
-  notify:
-    - restart redis
-  when: rockyrepo_name.stat.exists
+  when: ansible_os_family == 'Debian'
 
 # Note: Fails in --check mode with /etc/redis/redis.conf
 # does not exist
@@ -47,7 +42,6 @@
     state: present
   notify:
     - restart redis
-  when: ansible_os_family == 'RedHat' and not rockyrepo_name.stat.exists
 
 - name: set redis to start on startup
   become: true
