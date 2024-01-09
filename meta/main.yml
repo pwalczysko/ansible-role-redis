@@ -12,7 +12,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - jammy
-  namespace: ome
+  namespace: pwalczysko
   role_name: redis
   galaxy_tags: []
 
